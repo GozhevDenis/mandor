@@ -5,12 +5,13 @@ struct vec3d_t
 {
 public:
 	union {
-		struct { double x, y, z } v;
+		struct { double x, y, z; } v;
 		double r[3];
 	};
 
 	vec3d_t();
 	vec3d_t(double X, double Y, double Z);
+	vec3d_t(double R[3]);
 	//~vec3d_t();
 
 	vec3d_t& operator()(double X, double Y, double Z);				//нужна ли? напрямую работает быстрее?
