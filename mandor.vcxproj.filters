@@ -24,9 +24,6 @@
     <ClCompile Include="type_reg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="type_vector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="easylogging\easylogging++.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -39,9 +36,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="type_reg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="type_vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="easylogging\easylogging++.h">

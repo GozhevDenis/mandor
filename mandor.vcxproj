@@ -102,14 +102,12 @@
     <ClCompile Include="type_mesh.cpp" />
     <ClCompile Include="type_mesh2.cpp" />
     <ClCompile Include="type_reg.cpp" />
-    <ClCompile Include="type_vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="easylogging\easylogging++.h" />
     <ClInclude Include="type_mesh.h" />
     <ClInclude Include="type_mesh2.h" />
     <ClInclude Include="type_reg.h" />
-    <ClInclude Include="type_vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
