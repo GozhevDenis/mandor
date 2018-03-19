@@ -27,6 +27,12 @@
     <ClCompile Include="easylogging\easylogging++.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="vec3d_t.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="type_vector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="type_mesh.h">
@@ -39,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="easylogging\easylogging++.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="type_vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
