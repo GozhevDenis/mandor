@@ -110,7 +110,6 @@
     <ClInclude Include="type_mesh2.h" />
     <ClInclude Include="type_reg.h" />
     <ClInclude Include="type_vector.h" />
-    <ClInclude Include="type_vector2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
