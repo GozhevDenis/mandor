@@ -44,9 +44,6 @@
     <ClInclude Include="type_vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="type_vector2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="easylogging\easylogging++.h">
       <Filter>Header Files</Filter>
     </ClInclude>
