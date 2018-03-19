@@ -14,12 +14,12 @@ public:
 	explicit vec3d_t(double X, double Y, double Z);
 	explicit vec3d_t(const double r[3]);
 	///explicit vec3d_t(const vec3d_t&); доделать!
-	~vec3d_t();
+	//~vec3d_t();
 
 	const double& operator[](size_type axis) const;
 	double& operator[](size_type axis);
 
-	vec3d_t& operator()(double X, double Y, double Z);
+	vec3d_t& operator()(double X, double Y, double Z);     //нужен ли, если хотим высокую скорость
 
 	///vec3d_t& operator=(const vec3d_t&); доделать!!
 
