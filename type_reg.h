@@ -61,7 +61,7 @@ class regList_t
 	std::vector<reg_t> list;
 	public:
 		const int getSize();
-		void push_back(const &reg_t);
+		void push_back(const reg_t&);
 		void clear();
 		void slice(int, int);
 		const int verify();

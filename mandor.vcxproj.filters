@@ -18,9 +18,6 @@
     <ClCompile Include="type_mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="type_mesh2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="type_reg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -33,9 +30,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="type_mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="type_mesh2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="type_reg.h">

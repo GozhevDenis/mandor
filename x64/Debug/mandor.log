@@ -1,0 +1,9 @@
+﻿  easylogging++.cc
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\crtdefs.h(10): fatal error C1083: Не удается открыть файл включение: corecrt.h: No such file or directory,
+  type_mesh.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\crtdefs.h(10): fatal error C1083: Не удается открыть файл включение: corecrt.h: No such file or directory,
+  type_reg.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\crtdefs.h(10): fatal error C1083: Не удается открыть файл включение: corecrt.h: No such file or directory,
+  type_vector.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\crtdefs.h(10): fatal error C1083: Не удается открыть файл включение: corecrt.h: No such file or directory,
+  Создание кода...
