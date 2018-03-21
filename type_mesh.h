@@ -27,11 +27,17 @@ public:
 	mesh_t(int, int, int, int, int, int, const char*);
 	~mesh_t();
 
+	//mesh_t(const mesh_t&)							//доделать
+	//mesh_& operator=(const mesh_t&)				//или запретить
+
 	explicit mesh_t(int [3], int[3], const char*);
 	void free();										////нужен ли этот метод?
 	void resize(int, int, int, int, int, int);
 	///void save();
 	///void load();
+
+	T& operator()(int i, int j, int k);
+	const T& operator()(int i, int j, int k) const;
 
 	template <typename U> friend std::ostream& operator << (std::ostream&, const mesh_t<U>&);
 
