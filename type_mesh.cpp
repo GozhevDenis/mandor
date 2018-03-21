@@ -91,11 +91,11 @@ void mesh_t<T>::resize(int Imin, int Jmin, int Kmin,
 template<typename T>
 T& mesh_t<T>::operator()(int i, int j, int k)
 {
-//	return storage[i*MC_X*width_yz + j*MC_Y*width_z + k*MC_Z + origin];
+	return storage[i*MC_X*width_yz + j*MC_Y*width_z + k*MC_Z + origin];
 }
 
 template<typename T>
 const T& mesh_t<T>::operator()(int i, int j, int k) const
 {
-	return storage[i*MC_X*width_yz + j * MC_Y*width_z + k * MC_Z + origin];
+	return storage[i*MC_X*width_yz + j*MC_Y*width_z + k*MC_Z + origin];
 }
