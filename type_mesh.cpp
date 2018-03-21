@@ -58,13 +58,13 @@ void mesh_t<T>::init()
 	sizeZ = kmax - kmin + 1;
 
 	width_z = sizeZ;
-	width_yz = sizeY * sizeZ;
+	width_yz = sizeY*sizeZ;
 
 	storage = new (std::nothrow) T[sizeX*sizeY*sizeZ];					
 	
 	CHECK(storage) << "Memory is not allocated";						//возможно появление ошибки std::bad_array_new_length при первом выделение, не знаю как исправить
 
-	origin = -imin * MC_X*width_yz - jmin * MC_Y*width_z - kmin * MC_Z;				///MC
+	origin = -imin*MC_X*width_yz - jmin*MC_Y*width_z - kmin*MC_Z;				///MC
 }
 
 template <typename T> 
@@ -86,4 +86,16 @@ void mesh_t<T>::resize(int Imin, int Jmin, int Kmin,
 	kmax = Kmax;
 	(*this).free();
 	(*this).init();
+}
+
+template<typename T>
+T& mesh_t<T>::operator()(int i, int j, int k)
+{
+	return storage[i*width_yz + j*width_yz + k - origin];
+}
+
+template<typename T>
+const T& mesh_t<T>::operator()(int i, int j, int k) const
+{
+	return storage[i*width_yz + j * width_yz + k - origin];
 }

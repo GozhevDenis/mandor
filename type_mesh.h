@@ -33,6 +33,9 @@ public:
 	///void save();
 	///void load();
 
+	T& operator()(int i, int j, int k);
+	const T& operator()(int i, int j, int k) const;
+
 	template <typename U> friend std::ostream& operator << (std::ostream&, const mesh_t<U>&);
 
 };

@@ -89,6 +89,6 @@ const double vec3d_t::dot(const vec3d_t& rhs) const
 const vec3d_t vec3d_t::cross(const vec3d_t& rhs) const
 {
 	return vec3d_t(this->y * rhs.z - this->z * rhs.y,
-		this->z * rhs.x - this->x * rhs.z,
-		this->x * rhs.y - this->y * rhs.x);
+		this->z*rhs.x - this->x*rhs.z,
+		this->x*rhs.y - this->y*rhs.x);
 }
