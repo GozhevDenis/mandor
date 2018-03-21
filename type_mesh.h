@@ -12,9 +12,6 @@ template <typename T>
 class mesh_t
 {
 private:
-	int imin, imax;
-	int jmin, jmax;
-	int kmin, kmax;
 	int width_z;
 	int width_yz;
 	T *storage;
@@ -23,6 +20,10 @@ private:
 
 	void init();										//width initialization and memory allocation
 public:
+	int imin, imax;
+	int jmin, jmax;
+	int kmin, kmax;
+
 	mesh_t();
 	mesh_t(int, int, int, int, int, int, const char*);
 	~mesh_t();
