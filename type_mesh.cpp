@@ -136,4 +136,5 @@ void mesh_t<T>::save(const char * name,
 
 	int size = (Imax - Imin + 1)*(Jmax - Jmin + 1)*(Kmax - Kmin + 1);
 	f.write((char*)storage, size*sizeof(T));								//почему не так, а через цикл?
+	f.close();
 }
