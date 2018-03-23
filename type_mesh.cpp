@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "type_mesh.h"
+#include <fstream>
 #include "easylogging\easylogging++.cc"
 
 #define MC_X 1      //для теста
@@ -67,6 +68,16 @@ void mesh_t<T>::init()
 	origin = -imin*MC_X*width_yz - jmin*MC_Y*width_z - kmin*MC_Z;				///MC
 }
 
+template<typename T>													//проверка нахождение области внутри mesh
+bool mesh_t<T>::IsInside(int Imin, int Jmin, int Kmin, 
+						 int Imax, int Jmax, int Kmax) const
+{
+	CHECK(Imin <= Imax && Jmin <= Jmax && Kmin <= Kmax)
+	return ((Imin - imin)*(imax - Imax) >= 0 &&
+			(Jmin - jmin)*(jmax - Jmax) >= 0 &&
+			(Kmin - kmin)*(kmax - Kmax) >= 0);
+}
+
 template <typename T> 
 void mesh_t<T>::free()									//нужен ли этот метод? Подумать может его сделать закрытым
 {
@@ -98,4 +109,31 @@ template<typename T>
 const T& mesh_t<T>::operator()(int i, int j, int k) const
 {
 	return storage[i*MC_X*width_yz + j*MC_Y*width_z + k*MC_Z + origin];
+}
+
+template<typename T>
+void mesh_t<T>::save(const char * name, 
+					 int Imin, int Jmin, int Kmin, 
+					 int Imax, int Jmax, int Kmax)
+{
+	CHECK((*this).IsInside(imin, jmin, kmin,
+						   imax, jmax, kmax)) << "Bad arguments for save region";
+	Imin *= MC_X;
+	Imax *= MC_X;
+	Jmin *= MC_Y;
+	Jmax *= MC_Y;
+	Kmin *= MC_Z;
+	Kmax *= MC_Z;
+
+	ofstream f(name, ios::binary);
+	f.write((char*)&Imin, sizeof(Imin));
+	f.write((char*)&Jmin, sizeof(Jmin));
+	f.write((char*)&Kmin, sizeof(Kmin));
+	f.write((char*)&Imax, sizeof(Imax));
+	f.write((char*)&Jmax, sizeof(Jmax));
+	f.write((char*)&Kmax, sizeof(Kmax));
+	f.write((char*)this, sizeof(*this));									//надо ли?
+
+	int size = (Imax - Imin + 1)*(Jmax - Jmin + 1)*(Kmax - Kmin + 1);
+	f.write((char*)storage, size*sizeof(T));								//почему не так, а через цикл?
 }

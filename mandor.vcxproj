@@ -99,12 +99,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="easylogging\easylogging++.cc" />
+    <ClCompile Include="Source.cpp" />
     <ClCompile Include="type_mesh.cpp" />
     <ClCompile Include="type_reg.cpp" />
     <ClCompile Include="type_vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="easylogging\easylogging++.h" />
+    <ClInclude Include="Header.h" />
     <ClInclude Include="type_mesh.h" />
     <ClInclude Include="type_reg.h" />
     <ClInclude Include="type_vector.h" />

@@ -19,6 +19,8 @@ private:
 	std::string name;
 
 	void init();										//width initialization and memory allocation
+	bool IsInside(int imin, int jmin, int kmin,
+				  int imax, int jmax, int kmax) const;
 public:
 	int imin, imax;
 	int jmin, jmax;
@@ -39,6 +41,9 @@ public:
 
 	T& operator()(int i, int j, int k);
 	const T& operator()(int i, int j, int k) const;
+
+	void save(const char *name, int imin, int jmin, int kmin,
+								int imax, int jmax, int kmax) const;
 
 	template <typename U> friend std::ostream& operator << (std::ostream&, const mesh_t<U>&);
 
