@@ -16,6 +16,7 @@ mesh_t<T>::mesh_t(): imin(0), jmin(0), kmin(0),
 {
 	(*this).init();
 }
+
 template <typename T> 
 mesh_t<T>::mesh_t(int Imin, int Jmin, int Kmin,
 			   	  int Imax, int Jmax, int Kmax,
@@ -25,11 +26,13 @@ mesh_t<T>::mesh_t(int Imin, int Jmin, int Kmin,
 {
 	(*this).init();
 }
+
 template<typename T>
 mesh_t<T>::~mesh_t()
 {
 	delete[] storage;
 }
+
 template <typename T> 
 mesh_t<T>::mesh_t(int min[3],
 				  int max[3],
@@ -114,7 +117,7 @@ const T& mesh_t<T>::operator()(int i, int j, int k) const
 template<typename T>
 void mesh_t<T>::save(const char * name, 
 					 int Imin, int Jmin, int Kmin, 
-					 int Imax, int Jmax, int Kmax)
+					 int Imax, int Jmax, int Kmax) const
 {
 	CHECK((*this).IsInside(imin, jmin, kmin,
 						   imax, jmax, kmax)) << "Bad arguments for save region";
