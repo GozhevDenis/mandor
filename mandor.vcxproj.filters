@@ -21,13 +21,16 @@
     <ClCompile Include="type_reg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="easylogging\easylogging++.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="type_vector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source.cpp">
+    <ClCompile Include="em.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="easylogging\easylogging++.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,13 +41,16 @@
     <ClInclude Include="type_reg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="easylogging\easylogging++.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="type_vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Header.h">
+    <ClInclude Include="testConstMacros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="em.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="easylogging\easylogging++.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

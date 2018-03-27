@@ -2,11 +2,9 @@
 #include <iostream>
 #include "type_mesh.h"
 #include <fstream>
-#include "easylogging\easylogging++.cc"
+#include "testConstMacros.h"
+#include "easylogging\easylogging++.h"
 
-#define MC_X 1      //для теста
-#define MC_Y 1
-#define MC_Z 1
 
 
 template<typename T>

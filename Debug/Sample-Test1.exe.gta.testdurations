@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GtaTestDurations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Executable>D:\Users\Hp\Desktop\mandor_new(new)\new_source\Debug\Sample-Test1.exe</Executable>
+  <TestDurations>
+    <TestDuration Test="TestCaseName.TestName" Duration="1" />
+    <TestDuration Test="TestVector.DefaulConstr" Duration="1" />
+    <TestDuration Test="TestVector.XYZConstr" Duration="1" />
+    <TestDuration Test="TestVector.RConstr" Duration="1" />
+    <TestDuration Test="TestVector.OperatorSquareBrackets" Duration="1" />
+    <TestDuration Test="TestVector.OperatorRoundBrackets" Duration="1" />
+    <TestDuration Test="TestVector.OperatorPlusEquals" Duration="1" />
+    <TestDuration Test="TestVector.OperatorMinusEquals" Duration="1" />
+    <TestDuration Test="TestVector.OperatorPlus" Duration="1" />
+    <TestDuration Test="TestVector.OperatorMinus" Duration="1" />
+    <TestDuration Test="TestVector.OperatorMultiplyEquals" Duration="1" />
+    <TestDuration Test="TestVector.OperatorMultiply" Duration="1" />
+    <TestDuration Test="TestVector.Dot" Duration="1" />
+    <TestDuration Test="TestVector.Cross" Duration="1" />
+    <TestDuration Test="TestVector.OutputOperator" Duration="1" />
+  </TestDurations>
+</GtaTestDurations>
