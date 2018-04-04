@@ -73,7 +73,7 @@ template<typename T>													//проверка нахождение обл�
 bool mesh_t<T>::IsInside(int Imin, int Jmin, int Kmin, 
 						 int Imax, int Jmax, int Kmax) const
 {
-	CHECK(Imin <= Imax && Jmin <= Jmax && Kmin <= Kmax)
+	CHECK(Imin <= Imax && Jmin <= Jmax && Kmin <= Kmax);
 	return ((Imin - imin)*(imax - Imax) >= 0 &&
 			(Jmin - jmin)*(jmax - Jmax) >= 0 &&
 			(Kmin - kmin)*(kmax - Kmax) >= 0);
@@ -138,4 +138,15 @@ void mesh_t<T>::save(const char * name,
 	int size = (Imax - Imin + 1)*(Jmax - Jmin + 1)*(Kmax - Kmin + 1);
 	f.write((char*)storage, size*sizeof(T));								//почему не так, а через цикл?
 	f.close();
+}
+
+template <typename T> 
+std::ostream& operator << (std::ostream& os, const mesh_t<T>& mesh)
+{
+	os << "(" << mesh.imin << "," << mesh.jmin << "," << mesh.kmin << ")\n";
+	os << "(" << mesh.imax << "," << mesh.jmax << "," << mesh.kmax << ")\n";
+	os << "(" << mesh.width_z << "," << mesh.width_yz << ")" << "\n";
+	os << mesh.origin << "\n";
+	os << mesh.name << "\n";
+	return os;
 }

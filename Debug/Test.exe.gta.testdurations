@@ -16,5 +16,10 @@
     <TestDuration Test="TestVector.Dot" Duration="1" />
     <TestDuration Test="TestVector.Cross" Duration="1" />
     <TestDuration Test="TestVector.OutputOperator" Duration="1" />
+    <TestDuration Test="TestMesh.DefaulConstr" Duration="1" />
+    <TestDuration Test="TestMesh.Constr" Duration="1" />
+    <TestDuration Test="TestMesh.ConstrR" Duration="1" />
+    <TestDuration Test="TestMesh.Resize" Duration="1" />
+    <TestDuration Test="TestMesh.IsInside" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

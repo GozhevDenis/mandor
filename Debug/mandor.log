@@ -1,10 +1,2 @@
-﻿  easylogging++.cc
-  em.cpp
-  main_test.cpp
-  type_mesh.cpp
-  type_reg.cpp
-  type_vector.cpp
-  Generating Code...
-d:\users\hp\desktop\mandor_new(new)\new_source\type_reg.cpp(94): warning C4172: returning address of local variable or temporary: buffer
-d:\users\hp\desktop\mandor_new(new)\new_source\type_reg.cpp(104): warning C4172: returning address of local variable or temporary: buffer
+﻿  type_mesh.cpp
   mandor.vcxproj -> D:\Users\Hp\Desktop\mandor_new(new)\new_source\Debug\mandor.exe
