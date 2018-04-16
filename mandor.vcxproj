@@ -99,6 +99,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="easylogging\easylogging++.cc" />
+    <ClCompile Include="em.cpp" />
+    <ClCompile Include="main_test.cpp" />
     <ClCompile Include="type_mesh.cpp" />
     <ClCompile Include="type_mesh2.cpp" />
     <ClCompile Include="type_reg.cpp" />
@@ -106,6 +108,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="easylogging\easylogging++.h" />
+    <ClInclude Include="em.h" />
+    <ClInclude Include="testConstMacros.h" />
     <ClInclude Include="type_mesh.h" />
     <ClInclude Include="type_mesh2.h" />
     <ClInclude Include="type_reg.h" />
