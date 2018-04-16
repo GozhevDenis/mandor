@@ -1,4 +1,4 @@
-#pragma once
+//#pragma once
 #include <iostream>
 #include "type_mesh.h"
 #include "testConstMacros.h"

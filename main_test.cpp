@@ -2,7 +2,7 @@
 
 INITIALIZE_EASYLOGGINGPP
 
-int main(void)
+int main()
 {
 	return 0;
 }

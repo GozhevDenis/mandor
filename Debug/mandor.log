@@ -1,3 +1,2 @@
-﻿  main_test.cpp
-MSVCRTD.lib(exe_winmain.obj) : error LNK2019: ссылка на неразрешенный внешний символ _WinMain@16 в функции "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
-D:\Users\Hp\Desktop\mandor_new(new)\new_source\Debug\mandor.exe : fatal error LNK1120: неразрешенных внешних элементов: 1
+﻿  em.cpp
+  mandor.vcxproj -> D:\Users\Hp\Desktop\mandor_new(new)\new_source\Debug\mandor.exe
