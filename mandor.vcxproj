@@ -103,7 +103,6 @@
     <ClCompile Include="type_mesh2.cpp" />
     <ClCompile Include="type_reg.cpp" />
     <ClCompile Include="type_vector.cpp" />
-    <ClCompile Include="vec3d_t.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="easylogging\easylogging++.h" />

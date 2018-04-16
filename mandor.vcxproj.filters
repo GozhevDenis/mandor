@@ -27,9 +27,6 @@
     <ClCompile Include="easylogging\easylogging++.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vec3d_t.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="type_vector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

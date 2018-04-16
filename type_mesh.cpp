@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include "type_mesh.h"
-#include "easylogging\easylogging++.cc"
+#include "easylogging\easylogging++.h"
 
 #define MC_X 1      //для теста
 #define MC_Y 1

@@ -4,9 +4,11 @@
 #include <vector>
 
 #include "type_reg.h"
-#include "cfg_domain.h"		        ///< \todo Replace by \b dimensions.h.
+
+#include "testConstMacros.h"
+//#include "cfg_domain.h"		        ///< \todo Replace by \b dimensions.h.
 //#include "test.h"      //only for test
-#include "log.h"
+//#include "log.h"
 
 reg_t::reg_t(int Min[3], int Max[3], int Cpu, int Barcode, int Wrap[3])
 {
