@@ -3,3 +3,9 @@
 ################################################################################
 
 /.vs/mandor/v15
+
+# Visual Studio files (unused on Linux).
+mandor.sln
+mandor.vcxproj
+mandor.vcxproj.filters
+mandor.vcxproj.user
