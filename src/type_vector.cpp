@@ -1,147 +1,75 @@
-#pragma once
 #include "type_vector.h"
-#include "easylogging\easylogging++.cc"
 
-vec3d_t::vec3d_t(): x(0), y(0), z(0) {}
+vec3d_t::vec3d_t()                              : r{ 0,0,0 } {}
+vec3d_t::vec3d_t(double X, double Y, double Z)  : r{ X,Y,Z } {}
+vec3d_t::vec3d_t(double R[3])                   : r{ R[0], R[1], R[2] } {}
 
-vec3d_t::vec3d_t(const double X, const double Y, const double Z): x(X), y(Y), z(Z) {}
-
-vec3d_t::vec3d_t(const double r[3]): x(r[0]), y(r[1]), z(r[2]) {}
-
-vec3d_t& vec3d_t::operator () (double X, double Y, double Z)
+vec3d_t& vec3d_t::operator()(double X, double Y, double Z)
 {
-    this->x = X;
-    this->y = Y;
-    this->z = Z;
-    return *this;
+	this->v.x = X;
+	this->v.y = Y;
+	this->v.z = Z;
+	return *this;
 }
 
-vec3d_t& vec3d_t::operator += (const vec3d_t& rhs)
+vec3d_t& vec3d_t::operator+=(const vec3d_t& rhs)
 {
-	this->x += rhs.x;
-    this->y += rhs.y;
-    this->z += rhs.z;
-    return *this;
+	this->v.x += rhs.v.x;
+	this->v.y += rhs.v.y;
+	this->v.z += rhs.v.z;
+	return *this;
 }
 
-vec3d_t& vec3d_t::operator -= (const vec3d_t& rhs)
+vec3d_t& vec3d_t::operator-=(const vec3d_t& rhs)
 {
-	this->x -= rhs.x;
-    this->y -= rhs.y;
-    this->z -= rhs.z;
-    return *this;
+	this->v.x -= rhs.v.x;
+	this->v.y -= rhs.v.y;
+	this->v.z -= rhs.v.z;
+	return *this;
 }
 
-const vec3d_t vec3d_t::operator + (const vec3d_t& rhs) const
+const vec3d_t vec3d_t::operator+(const vec3d_t& rhs) const
 {
 	return vec3d_t(*this) += rhs;
 }
 
-const vec3d_t vec3d_t::operator - (const vec3d_t& rhs) const
+const vec3d_t vec3d_t::operator-(const vec3d_t &rhs) const
 {
 	return vec3d_t(*this) -= rhs;
 }
 
-const double vec3d_t::operator * (const vec3d_t& rhs) const
+vec3d_t& vec3d_t::operator*=(const double& rhs)
 {
-    return this->x*rhs.x + this->y*rhs.y + this->z*rhs.z;
+	this->v.x *= rhs;
+	this->v.y *= rhs;
+	this->v.z *= rhs;
+	return *this;
 }
 
-vec3d_t& vec3d_t::operator *= (const double& rhs)
+const double vec3d_t::dot(const vec3d_t& rhs) const
 {
-    this->x *= rhs;
-    this->y *= rhs;
-    this->z *= rhs;
-    return *this;
+	return this->v.x*rhs.v.x + this->v.y*rhs.v.y + this->v.z*rhs.v.z;
 }
 
-const double& vec3d_t::operator [] (int axis) const
+const vec3d_t vec3d_t::cross(const vec3d_t &rhs) const
 {
-    CHECK(axis >= 0 && axis < 3) << "Invalid index";
-    switch (axis)
-    {
-    case X_axis:
-        {
-            return x;
-            break;
-        }
-    case Y_axis:
-        {
-            return y;
-            break;
-        }
-    case Z_axis:
-        {
-            return z;
-            break;
-        }
-    default:
-        {
-            ///сообщение об ошибке
-            ///остановить с ошибкой!!!
-            //CHECK(false) << "Invalid index"; наверно уже не надо
-        }
-    }
-}
-double& vec3d_t::operator [] (int axis)
-{
-    return const_cast<double&>(static_cast<const vec3d_t&> (*this)[axis]);
+	return vec3d_t(this->v.y * rhs.v.z - this->v.z * rhs.v.y,
+				   this->v.z * rhs.v.x - this->v.x * rhs.v.z,
+				   this->v.x * rhs.v.y - this->v.y * rhs.v.x);
 }
 
-const double vec3d_t::getX() const
+const vec3d_t operator*(const double& lhs, const vec3d_t& rhs)
 {
-	return (*this)[0];
+	return vec3d_t(rhs) *= lhs;
 }
 
-const double vec3d_t::getY() const
+const vec3d_t operator*(const vec3d_t& lhs, const double& rhs)
 {
-	return (*this)[1];
+	return vec3d_t(lhs) *= rhs;
 }
 
-const double vec3d_t::getZ() const
+std::ostream & operator<<(std::ostream & os, const vec3d_t & vec)
 {
-	return (*this)[2];
-}
-
-void vec3d_t::setX(double X)
-{
-	(*this)[0] = X;
-}
-
-void vec3d_t::setY(double Y)
-{
-	(*this)[1] = Y;
-}
-
-void vec3d_t::setZ(double Z)
-{
-	(*this)[2] = Z;
-}
-
-const vec3d_t vec3d_t::operator ^ (const vec3d_t& rhs) const
-{
-    return vec3d_t(this->y * rhs.z - this->z * rhs.y,
-                   this->z * rhs.x - this->x * rhs.z,
-                   this->x * rhs.y - this->y * rhs.x);
-}
-
-
-bool vec3d_t::operator == (const vec3d_t& rhs) const
-{
-	return (this->x == rhs.x && this->y == rhs.y && this->z == rhs.z);
-}
-
-bool vec3d_t::operator != (const vec3d_t& rhs) const
-{
-	return !(*this == rhs);
-}
-
-
-const vec3d_t operator * (const vec3d_t& lhs, const double& rhs)
-{
-    return vec3d_t(lhs) *= rhs;
-}
-const vec3d_t operator * (const double& lhs, const vec3d_t& rhs)
-{
-    return vec3d_t(rhs) *= lhs;
+	os << "(" << vec.v.x << " " << vec.v.y << " " << vec.v.z << ")" << std::endl;
+	return os;
 }
