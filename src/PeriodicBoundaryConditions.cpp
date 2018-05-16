@@ -1,24 +1,26 @@
 #include <iostream>
 
+#include "testConstMacros.h"
+
 #include "PeriodicBoundaryConditions.h"
 
-void PeriodicConditions(mesh_t<vec3d_t> &V)
+void PeriodicConditions( mesh_t<vec3d_t> & V )
 {
-	for (int j = V.jmin + 1; j <= V.jmax - 1; ++j)
-    for (int k = V.kmin + 1; k <= V.kmax - 1; ++k) {
-        V(V.imin, j, k) = V(V.imax - 1, j, k);
-        V(V.imax, j, k) = V(V.imin + 1, j, k);
-    }
+   for ( int j = cpu_min[1] ; j <= cpu_max[1] ; ++j )
+   for ( int k = cpu_min[2] ; k <= cpu_max[2] ; ++k ) {
+      V(cpu_min[0] - 1, j, k) = V(cpu_max[0], j, k);
+      V(cpu_max[0] + 1, j, k) = V(cpu_min[0], j, k);
+   }
 
-	for (int i = V.imin + 1; i <= V.imax - 1; ++i)
-    for (int k = V.kmin + 1; k <= V.kmax - 1; ++k) {
-        V(i, V.jmin, k) = V(i, V.jmax - 1, k);
-        V(i, V.jmax, k) = V(i, V.jmin + 1, k);
-    }
+   for ( int i = cpu_min[0] + 1 ; i <= cpu_max[0] + 1 ; ++i )        // NOLINT
+   for ( int k = cpu_min[2]     ; k <= cpu_max[2]     ; ++k ) {
+      V(i, cpu_min[1] - 1, k) = V(i, cpu_max[1], k);
+      V(i, cpu_max[1] + 1, k) = V(i, cpu_min[1], k);
+   }
 
-	for (int i = V.imin + 1; i <= V.imax - 1; ++i)
-    for (int j = V.jmin + 1; j <= V.jmax - 1; ++j) {
-        V(i, j, V.kmin) = V(i, j, V.kmax - 1);
-        V(i, j, V.kmax) = V(i, j, V.kmin + 1);
-    }
+   for ( int i = cpu_min[0] - 1 ; i <= cpu_max[0] + 1 ; ++i )        // NOLINT
+   for ( int j = cpu_min[1] - 1 ; j <= cpu_max[1] + 1 ; ++j ) {
+      V(i, j, cpu_min[2] - 1) = V(i, j, cpu_max[2]);
+      V(i, j, cpu_max[2] + 1) = V(i, j, cpu_min[2]);
+   }
 }

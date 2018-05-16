@@ -1,6 +1,13 @@
 Основа - правила для Doom 3 C++ [1] и Google style guide [2].
 
 
+LANGUAGE
+--------
+* UTF-8 encoding.
+
+* Russian documentation, but English comments in the source code (please).
+ 
+
 GENERAL
 -------
 * Indent with 3 spaces.
