@@ -3,13 +3,27 @@
 
 GENERAL
 -------
-* Indent with 4 spaces.
+* Indent with 3 spaces.
+
+* Source width:
+
+      80 spaces, please!
+      120 spaces is a hard limit.
 
 * Use typically trailing braces everywhere (if, else, structures, typedefs, 
-class definitions, etc.)
+class definitions, etc.):
     
       if ( x ) {
       }
+      
+    except for functions:
+    
+    ```Cpp
+    void main( int argc, char** argv)
+    {
+        // Some elegant code here.
+    }
+    ```
 
 * The `else` statement starts on the same line as the last closing brace.
 
