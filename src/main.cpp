@@ -36,11 +36,11 @@ int main()
 
    int tN = 1000;
    for ( int t  = 0 ; t < tN ; ++t ) {
-      em_EStep( E, H );
-      PeriodicConditions( E );
-
       em_HStep( E, H );
       PeriodicConditions( H );
+
+      em_EStep( E, H );
+      PeriodicConditions( E );
 
       std::cout << t << std::endl;
       if ( t % 1 == 0 ) {
