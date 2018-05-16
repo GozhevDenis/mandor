@@ -14,7 +14,6 @@
 //  https://muflihun.github.io/easyloggingpp
 //  http://muflihun.com
 //
-#pragma once                               //убрать в итоге, моё дополнение!!
 #include "easylogging++.h"
 
 #if defined(AUTO_INITIALIZE_EASYLOGGINGPP)
