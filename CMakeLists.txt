@@ -14,14 +14,14 @@ include_directories(src/easylogging)
 add_executable(mandor
         src/easylogging/easylogging++.cc
         src/easylogging/easylogging++.h
-#        src/em.cpp
-#        src/em.h
-#        src/main.cpp
-#        src/PeriodicBoundaryConditions.cpp
-#        src/PeriodicBoundaryConditions.h
-#        src/planeWave.cpp
-#        src/planeWave.h
-#        src/testConstMacros.h
+        src/em.cpp
+        src/em.h
+        src/main.cpp
+        src/PeriodicBoundaryConditions.cpp
+        src/PeriodicBoundaryConditions.h
+        src/planeWave.cpp
+        src/planeWave.h
+        src/testConstMacros.h
         src/type_mesh.h
         src/type_vector.cpp
         src/type_vector.h)

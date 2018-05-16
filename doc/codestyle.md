@@ -18,12 +18,11 @@ class definitions, etc.):
       
     except for functions:
     
-    ```Cpp
-    void main( int argc, char** argv)
-    {
-        // Some elegant code here.
-    }
-    ```
+      void main( int argc, char** argv)
+      {
+          // Some elegant code here.
+      }
+    
 
 * The `else` statement starts on the same line as the last closing brace.
 
