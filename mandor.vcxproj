@@ -102,7 +102,8 @@
     <ClCompile Include="easylogging\easylogging++.cc" />
     <ClCompile Include="em.cpp" />
     <ClCompile Include="main_test.cpp" />
-    <ClCompile Include="type_mesh.cpp" />
+    <ClCompile Include="PeriodicBoundaryConditions.cpp" />
+    <ClCompile Include="planeWave.cpp" />
     <ClCompile Include="type_mesh2.cpp" />
     <ClCompile Include="type_reg.cpp" />
     <ClCompile Include="type_vector.cpp" />
@@ -110,11 +111,16 @@
   <ItemGroup>
     <ClInclude Include="easylogging\easylogging++.h" />
     <ClInclude Include="em.h" />
+    <ClInclude Include="PeriodicBoundaryConditions.h" />
+    <ClInclude Include="planeWave.h" />
     <ClInclude Include="testConstMacros.h" />
     <ClInclude Include="type_mesh.h" />
     <ClInclude Include="type_mesh2.h" />
     <ClInclude Include="type_reg.h" />
     <ClInclude Include="type_vector.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

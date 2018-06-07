@@ -1,0 +1,2 @@
+2018-04-18 17:46:06,213 FATAL [default] Check failed: [storage] Memory is not allocated
+2018-04-18 17:46:06,221 WARNING [default] Aborting application. Reason: Fatal log at [d:\users\hp\desktop\mandor_new(new)\new_source\type_mesh.h:106]

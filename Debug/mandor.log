@@ -1,4 +1,2 @@
-﻿  main_test.cpp
-main_test.obj : error LNK2019: ссылка на неразрешенный внешний символ "public: __thiscall mesh_t<double>::mesh_t<double>(int,int,int,int,int,int,char const *)" (??0?$mesh_t@N@@QAE@HHHHHHPBD@Z) в функции _main
-main_test.obj : error LNK2019: ссылка на неразрешенный внешний символ "public: __thiscall mesh_t<double>::~mesh_t<double>(void)" (??1?$mesh_t@N@@QAE@XZ) в функции _main
-D:\Users\Hp\Desktop\mandor_new(new)\new_source\Debug\mandor.exe : fatal error LNK1120: неразрешенных внешних элементов: 2
+﻿  em.cpp
+  mandor.vcxproj -> D:\Users\Hp\Desktop\mandor_new(new)\new_source\Debug\mandor.exe

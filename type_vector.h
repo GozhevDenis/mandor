@@ -14,7 +14,7 @@ public:
 	vec3d_t(double R[3]);
 	//~vec3d_t();
 
-	vec3d_t& operator()(double X, double Y, double Z);				//нужна ли? напрямую работает быстрее?
+	vec3d_t& operator()(double X, double Y, double Z);				//РЅСѓР¶РЅР° Р»Рё? РЅР°РїСЂСЏРјСѓСЋ СЂР°Р±РѕС‚Р°РµС‚ Р±С‹СЃС‚СЂРµРµ?
 	vec3d_t& operator+=(const vec3d_t& rhs);
 	vec3d_t& operator-=(const vec3d_t& rhs);
 	const vec3d_t operator+(const vec3d_t& rhs) const;
@@ -28,4 +28,3 @@ public:
 
 	friend std::ostream& operator<<(std::ostream& os, const vec3d_t& vec);
 };
-

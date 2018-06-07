@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>d:\users\hp\desktop\mandor_new(new)\new_source\easylogging\</FILEPATH>
+      <FILENAME>easylogging++.cc</FILENAME>
+      <LINE>809</LINE>
+      <COLUMN>24</COLUMN>
+    </SFA>
+    <DEFECTCODE>6330</DEFECTCODE>
+    <DESCRIPTION>"char" передан в качестве параметра _Param_(1), хотя при вызове "isspace" требуется "unsigned char".</DESCRIPTION>
+    <FUNCTION>el::base::utils::Str::ltrim::&lt;lambda_b3258783882e45f8a85bdfa02fe8de9a&gt;::()</FUNCTION>
+    <DECORATED>??R&lt;lambda_b3258783882e45f8a85bdfa02fe8de9a&gt;@@QBE_ND@Z</DECORATED>
+    <FUNCLINE>810</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>d:\users\hp\desktop\mandor_new(new)\new_source\easylogging\</FILEPATH>
+      <FILENAME>easylogging++.cc</FILENAME>
+      <LINE>816</LINE>
+      <COLUMN>24</COLUMN>
+    </SFA>
+    <DEFECTCODE>6330</DEFECTCODE>
+    <DESCRIPTION>"char" передан в качестве параметра _Param_(1), хотя при вызове "isspace" требуется "unsigned char".</DESCRIPTION>
+    <FUNCTION>el::base::utils::Str::rtrim::&lt;lambda_eb8c2edf8ac469a5f5eef915476e7a15&gt;::()</FUNCTION>
+    <DECORATED>??R&lt;lambda_eb8c2edf8ac469a5f5eef915476e7a15&gt;@@QBE_ND@Z</DECORATED>
+    <FUNCLINE>817</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>d:\users\hp\desktop\mandor_new(new)\new_source\easylogging\</FILEPATH>
+      <FILENAME>easylogging++.cc</FILENAME>
+      <LINE>1931</LINE>
+      <COLUMN>19</COLUMN>
+    </SFA>
+    <DEFECTCODE>6330</DEFECTCODE>
+    <DESCRIPTION>"const char" передан в качестве параметра _Param_(1), хотя при вызове "isdigit" требуется "unsigned char".</DESCRIPTION>
+    <FUNCTION>el::base::VRegistry::setModules</FUNCTION>
+    <DECORATED>?setModules@VRegistry@base@el@@QAEXPBD@Z</DECORATED>
+    <FUNCLINE>1871</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>
