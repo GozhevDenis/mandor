@@ -8,6 +8,8 @@
 #include "planeWave.h"
 #include "PeriodicBoundaryConditions.h"
 
+#include "log.h"
+
 #include "em.h"
 
 
@@ -28,11 +30,10 @@ int main()
                       "E" ),
                    H( cpu_min[0] - 1, cpu_min[1] - 1, cpu_min[2] - 1,
                       cpu_max[0] + 1, cpu_max[1] + 1, cpu_max[2] + 1,
-                      "E" );
+                      "H" );
 
    EWaveStart( E, H );
 
-   std::ofstream fout( "output.dat" );
 
    int tN = 1000;
    for ( int t  = 0 ; t < tN ; ++t ) {
@@ -43,8 +44,8 @@ int main()
       PeriodicConditions( E );
 
       std::cout << t << std::endl;
-      if ( t % 1 == 0 ) {
-         fout << t << "\t" << E(1, 5, 10).v.y << "\n";
+      if ( t % 100 == 0 ) {
+         E.save( string_format( "EM/EM_%06d", t ) );
       }
    }
 

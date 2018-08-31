@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "easylogging/easylogging++.h"
+#include "H5Cpp.h"
 
 #include "type_mesh.h"
 #include "testConstMacros.h"
@@ -39,6 +40,8 @@ public:
    T& operator()( int i, int j, int k );
 
    const T& operator()( int i, int j, int k ) const;
+
+   void save( const std::string& );
 
    template<typename U>
    friend std::ostream& operator<<( std::ostream&, const mesh_t<U>& );
@@ -148,4 +151,38 @@ template<typename T>
 const T& mesh_t<T>::operator()( int i, int j, int k ) const
 {
    return storage[i * MC_X * width_yz + j * MC_Y * width_z + k * MC_Z + origin];
+}
+
+template<typename T>
+void mesh_t<T>::save( const std::string& fileName )
+{
+   int sizeX, sizeY, sizeZ;
+   int RANK = 4;
+
+   // доделать оси
+   imin *= MC_X;
+   imax *= MC_X;
+   jmin *= MC_Y;
+   jmax *= MC_Y;
+   kmin *= MC_Z;
+   kmax *= MC_Z;
+
+   CHECK( imin <= imax && jmin <= jmax && kmin <= kmax ) << "Bad arguments";
+
+   sizeX = imax - imin + 1;
+   sizeY = jmax - jmin + 1;
+   sizeZ = kmax - kmin + 1;
+
+   H5::H5File f( fileName + ".h5", H5F_ACC_TRUNC );
+   hsize_t dimsf[4];
+   dimsf[0] = sizeX;
+   dimsf[1] = sizeY;
+   dimsf[2] = sizeZ;
+   dimsf[3] = 3;
+   H5::DataSpace dataspace( RANK, dimsf );
+
+   H5::DataSet dataset = f.createDataSet( name, H5::PredType::NATIVE_DOUBLE, dataspace );
+   dataset.write(storage, H5::PredType::NATIVE_DOUBLE);
+
+
 }
