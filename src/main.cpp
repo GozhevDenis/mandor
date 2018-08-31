@@ -8,8 +8,6 @@
 #include "planeWave.h"
 #include "PeriodicBoundaryConditions.h"
 
-#include "log.h"
-
 #include "em.h"
 
 
@@ -45,7 +43,7 @@ int main()
 
       std::cout << t << std::endl;
       if ( t % 100 == 0 ) {
-         E.save( string_format( "EM/EM_%06d", t ) );
+         E.save( "EM/EM", t  );
       }
    }
 

@@ -9,6 +9,8 @@
 #include "type_mesh.h"
 #include "testConstMacros.h"
 
+#include "log.h"
+
 template<typename T>
 class mesh_t {
 private:
@@ -18,8 +20,6 @@ private:
    int         origin;
    std::string name;
 
-   // width initialization and memory allocation
-   void init();
 
 public:
    int         imin, imax;
@@ -41,23 +41,13 @@ public:
 
    const T& operator()( int i, int j, int k ) const;
 
-   void save( const std::string& );
+   void save( const std::string& fileName, int step );
 
    template<typename U>
    friend std::ostream& operator<<( std::ostream&, const mesh_t<U>& );
 };
 
-
 // TODO: do delegating constructors [https://www.ibm.com/developerworks/community/blogs/5894415f-be62-4bc0-81c5-3956e82276f3/entry/introduction_to_the_c_11_feature_delegating_constructors?lang=en].
-template<typename T>
-mesh_t<T>::mesh_t()
-:  imin( 0 ), jmin( 0 ), kmin( 0 ),
-   imax( 0 ), jmax( 0 ), kmax( 0 ),
-   name( "new_mesh" )
-{
-   this->init();
-}
-
 template<typename T>
 mesh_t<T>::mesh_t( int Imin, int Jmin, int Kmin,
                    int Imax, int Jmax, int Kmax,
@@ -66,56 +56,54 @@ mesh_t<T>::mesh_t( int Imin, int Jmin, int Kmin,
    imax( Imax ), jmax( Jmax ), kmax( Kmax ),
    name( Name )
 {
-   this->init();
+    int sizeX, sizeY, sizeZ;
+
+    // доделать оси
+    imin *= MC_X;
+    imax *= MC_X;
+    jmin *= MC_Y;
+    jmax *= MC_Y;
+    kmin *= MC_Z;
+    kmax *= MC_Z;
+
+    CHECK( imin <= imax && jmin <= jmax && kmin <= kmax ) << "Bad arguments";
+
+    sizeX = imax - imin + 1;
+    sizeY = jmax - jmin + 1;
+    sizeZ = kmax - kmin + 1;
+
+    width_z  = sizeZ;
+    width_yz = sizeY * sizeZ;
+
+    // TODO: handle memory allocation error as the error!
+    storage = new( std::nothrow ) T[sizeX * sizeY * sizeZ];
+
+    // Возможно появление ошибки std::bad_array_new_length при первом выделение,
+    // не знаю как исправить.
+    CHECK( storage ) << "Memory is not allocated";
+
+    origin = -MC_X * imin * width_yz - MC_Y * jmin * width_z - kmin * MC_Z;
 }
 
+
 template<typename T>
-mesh_t<T>::~mesh_t()
-{
-   free();
-}
+mesh_t<T>::mesh_t()
+:  mesh_t( 0, 0, 0,
+           0, 0, 0,
+         "new_mesh" ) {}
 
 template<typename T>
 mesh_t<T>::mesh_t( const int min[3],
                    const int max[3],
                    const char * Name )
-:  imin( min[0] ), jmin( min[1] ), kmin( min[2] ),
-   imax( max[0] ), jmax( max[1] ), kmax( max[2] ),
-   name( Name )
-{
-   this->init();
-}
+:  mesh_t( min[0], min[1], min[2],
+           max[0], max[1], max[2],
+           Name ) {}
 
 template<typename T>
-void mesh_t<T>::init()
+mesh_t<T>::~mesh_t()
 {
-   int sizeX, sizeY, sizeZ;
-
-   // доделать оси
-   imin *= MC_X;
-   imax *= MC_X;
-   jmin *= MC_Y;
-   jmax *= MC_Y;
-   kmin *= MC_Z;
-   kmax *= MC_Z;
-
-   CHECK( imin <= imax && jmin <= jmax && kmin <= kmax ) << "Bad arguments";
-
-   sizeX = imax - imin + 1;
-   sizeY = jmax - jmin + 1;
-   sizeZ = kmax - kmin + 1;
-
-   width_z  = sizeZ;
-   width_yz = sizeY * sizeZ;
-
-   // TODO: handle memory allocation error as the error!
-   storage = new( std::nothrow ) T[sizeX * sizeY * sizeZ];
-
-   // Возможно появление ошибки std::bad_array_new_length при первом выделение,
-   // не знаю как исправить.
-   CHECK( storage ) << "Memory is not allocated";
-
-   origin = -MC_X * imin * width_yz - MC_Y * jmin * width_z - kmin * MC_Z;
+   free();
 }
 
 // Нужен ли этот метод? Подумать, может его сделать закрытым.
@@ -154,7 +142,7 @@ const T& mesh_t<T>::operator()( int i, int j, int k ) const
 }
 
 template<typename T>
-void mesh_t<T>::save( const std::string& fileName )
+void mesh_t<T>::save( const std::string& fileName, int step )
 {
    int sizeX, sizeY, sizeZ;
    int RANK = 4;
@@ -173,7 +161,7 @@ void mesh_t<T>::save( const std::string& fileName )
    sizeY = jmax - jmin + 1;
    sizeZ = kmax - kmin + 1;
 
-   H5::H5File f( fileName + ".h5", H5F_ACC_TRUNC );
+   H5::H5File f( fileName + string_format( "_%06d", step ) + ".h5", H5F_ACC_TRUNC );
    hsize_t dimsf[4];
    dimsf[0] = sizeX;
    dimsf[1] = sizeY;
@@ -183,6 +171,27 @@ void mesh_t<T>::save( const std::string& fileName )
 
    H5::DataSet dataset = f.createDataSet( name, H5::PredType::NATIVE_DOUBLE, dataspace );
    dataset.write(storage, H5::PredType::NATIVE_DOUBLE);
+
+    //stub for attributes
+    double dx = DX,
+           dy = DY,
+           dz = DZ,
+           t = DT * step;
+    H5::Attribute attDx =   dataset.createAttribute( "dx",   H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
+    H5::Attribute attDy =   dataset.createAttribute( "dy",   H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
+    H5::Attribute attDz =   dataset.createAttribute( "dz",   H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
+    H5::Attribute attDNx =  dataset.createAttribute( "Nx",   H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
+    H5::Attribute attDNy =  dataset.createAttribute( "Ny",   H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
+    H5::Attribute attDNz =  dataset.createAttribute( "Nz",   H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
+    H5::Attribute attTime = dataset.createAttribute( "time", H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
+    attDx.write(   H5::PredType::NATIVE_INT, &dx    );
+    attDy.write(   H5::PredType::NATIVE_INT, &dy    );
+    attDz.write(   H5::PredType::NATIVE_INT, &dz    );
+    attDNx.write(  H5::PredType::NATIVE_INT, &sizeX );
+    attDNy.write(  H5::PredType::NATIVE_INT, &sizeY );
+    attDNz.write(  H5::PredType::NATIVE_INT, &sizeZ );
+    attTime.write( H5::PredType::NATIVE_INT, &t     );
+
 
 
 }
