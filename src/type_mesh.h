@@ -14,8 +14,8 @@
 template<typename T>
 class mesh_t {
 private:
-   int         width_z;
-   int         width_yz;
+   int         widthZ;
+   int         widthYZ;
    T *         storage;
    int         origin;
    std::string name;
@@ -59,12 +59,14 @@ mesh_t<T>::mesh_t( int Imin, int Jmin, int Kmin,
     int sizeX, sizeY, sizeZ;
 
     // доделать оси
-    imin *= MC_X;
-    imax *= MC_X;
-    jmin *= MC_Y;
-    jmax *= MC_Y;
-    kmin *= MC_Z;
-    kmax *= MC_Z;
+    // expansion of the indexes boundaries for the ghost cells and folding inactive axes
+    // warning! DO NOT FORGOT THAT REAL SIZE IS LESS
+    imin = ( imin - 1 ) * MC_X;
+    imax = ( imax + 1 ) * MC_X;
+    jmin = ( jmin - 1 ) * MC_Y;
+    jmax = ( jmax + 1 ) * MC_Y;
+    kmin = ( kmin - 1 ) * MC_Z;
+    kmax = ( kmax + 1 ) * MC_Z;
 
     CHECK( imin <= imax && jmin <= jmax && kmin <= kmax ) << "Bad arguments";
 
@@ -72,8 +74,8 @@ mesh_t<T>::mesh_t( int Imin, int Jmin, int Kmin,
     sizeY = jmax - jmin + 1;
     sizeZ = kmax - kmin + 1;
 
-    width_z  = sizeZ;
-    width_yz = sizeY * sizeZ;
+    widthZ  = sizeZ;
+    widthYZ = sizeY * sizeZ;
 
     // TODO: handle memory allocation error as the error!
     storage = new( std::nothrow ) T[sizeX * sizeY * sizeZ];
@@ -82,7 +84,7 @@ mesh_t<T>::mesh_t( int Imin, int Jmin, int Kmin,
     // не знаю как исправить.
     CHECK( storage ) << "Memory is not allocated";
 
-    origin = -MC_X * imin * width_yz - MC_Y * jmin * width_z - kmin * MC_Z;
+    origin = -MC_X * imin * widthYZ - MC_Y * jmin * widthZ - kmin * MC_Z;
 }
 
 
@@ -132,13 +134,13 @@ template<typename T>
 T& mesh_t<T>::operator()( int i, int j, int k )
 {
    // сделать assert для того чтобы индексы были внутри диапазона?
-   return storage[i * MC_X * width_yz + j * MC_Y * width_z + k * MC_Z + origin];
+   return storage[i * MC_X * widthYZ + j * MC_Y * widthZ + k * MC_Z + origin];
 }
 
 template<typename T>
 const T& mesh_t<T>::operator()( int i, int j, int k ) const
 {
-   return storage[i * MC_X * width_yz + j * MC_Y * width_z + k * MC_Z + origin];
+   return storage[i * MC_X * widthYZ + j * MC_Y * widthZ + k * MC_Z + origin];
 }
 
 template<typename T>
@@ -176,7 +178,7 @@ void mesh_t<T>::save( const std::string& fileName, int step )
     double dx = DX,
            dy = DY,
            dz = DZ,
-           t = DT * step;
+           t =  DT * step;
     H5::Attribute attDx =   dataset.createAttribute( "dx",   H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
     H5::Attribute attDy =   dataset.createAttribute( "dy",   H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
     H5::Attribute attDz =   dataset.createAttribute( "dz",   H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
