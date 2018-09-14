@@ -7,6 +7,7 @@
 #include "type_mesh.h"
 #include "planeWave.h"
 #include "PeriodicBoundaryConditions.h"
+#include "initCondit.h"
 
 #include "em.h"
 
@@ -19,22 +20,36 @@
 
 INITIALIZE_EASYLOGGINGPP // NOLINT
 
+// Подумать, как эти параметры переписать подругому
+int    min[3];
+int    max[3];
+
+double dx,
+       dy,
+       dz;
+double l[3];
+
+double dt,
+       nStep;
+int cpu_min[3],
+    cpu_max[3];
+
+const double dr = 0.01;
+
 
 int main()
 {
+   // Initialization parameteres
+   setInitCond();
    // TODO: here we may utilize `node(cpu_min) - node(1, 1, 1)` algebra.
-   mesh_t<vec3d_t> E( cpu_min[0] - 1, cpu_min[1] - 1, cpu_min[2] - 1,
-                      cpu_max[0] + 1, cpu_max[1] + 1, cpu_max[2] + 1,
-                      "E" ),
-                   H( cpu_min[0] - 1, cpu_min[1] - 1, cpu_min[2] - 1,
-                      cpu_max[0] + 1, cpu_max[1] + 1, cpu_max[2] + 1,
-                      "H" );
+   mesh_t<vec3d_t> E( cpu_min, cpu_max, "E" );
+   mesh_t<vec3d_t> H( cpu_min, cpu_max, "H" );
+
 
    EWaveStart( E, H );
 
 
-   int tN = 1000;
-   for ( int t  = 0 ; t < tN ; ++t ) {
+   for ( int t  = 0 ; t < nStep ; ++t ) {
       em_HStep( E, H );
       PeriodicConditions( H );
 
@@ -43,7 +58,7 @@ int main()
 
       std::cout << t << std::endl;
       if ( t % 100 == 0 ) {
-         E.save( "EM/EM", t  );
+         E.save( "../output/EM/EM", t  );
       }
    }
 

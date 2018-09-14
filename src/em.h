@@ -55,6 +55,8 @@
 #include "type_vector.h"
 #include "type_mesh.h"
 
+#define EPS 0.01
+
 
 
 void em_HStep(mesh_t<vec3d_t> &E, mesh_t<vec3d_t> &H);

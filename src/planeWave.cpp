@@ -21,9 +21,9 @@ static void
 EMWave_setPhysFrame( void )
 {
    // Turns wave numbers to wave vector.
-   k.r[0] = 2 * PI * m[0] / ( DX * ( cpu_max[0] - cpu_min[0] ) );
-   k.r[1] = 2 * PI * m[1] / ( DY * ( cpu_max[1] - cpu_min[1] ) );
-   k.r[2] = 2 * PI * m[2] / ( DZ * ( cpu_max[2] - cpu_min[2] ) );
+   k.r[0] = 2 * PI * m[0] / ( dx * ( cpu_max[0] - cpu_min[0] ) );
+   k.r[1] = 2 * PI * m[1] / ( dy * ( cpu_max[1] - cpu_min[1] ) );
+   k.r[2] = 2 * PI * m[2] / ( dz * ( cpu_max[2] - cpu_min[2] ) );
 
    // Gets omega from normal dispersion equation, updates numerical wave vector.
    omega = Dt = sqrt( k.dot( k ) );
@@ -42,13 +42,13 @@ EMWave_setYee2Frame (void)
    EMWave_setPhysFrame ();
 
    // Apply dispersion factors to the wave vector.
-   Dr = vec3d_t( 2 * sin( 0.5 * k.r[0] * DX ) / DX,
-                 2 * sin( 0.5 * k.r[1] * DY ) / DY,
-                 2 * sin( 0.5 * k.r[2] * DZ ) / DZ );
+   Dr = vec3d_t( 2 * sin( 0.5 * k.r[0] * dx ) / dx,
+                 2 * sin( 0.5 * k.r[1] * dy ) / dy,
+                 2 * sin( 0.5 * k.r[2] * dz ) / dz );
 
    // Apply dispersion factors to the frequency.
    Dt    = sqrt( Dr.dot( Dr ) );
-   omega = asin( 0.5 * DT * Dt ) * 2 / DT;
+   omega = asin( 0.5 * dt * Dt ) * 2 / dt;
 }
 
 
@@ -89,9 +89,9 @@ EWaveStart ( mesh_t<vec3d_t> & E, mesh_t<vec3d_t> & H)
    printf( "  - Dr = (%e, %e, %e), Dt = %e", Dr.r[0], Dr.r[1], Dr.r[2], Dt );
 
    // Scales k to work with indices directly.
-   k.r[0] *= DX;
-   k.r[1] *= DY;
-   k.r[2] *= DZ;
+   k.r[0] *= dx;
+   k.r[1] *= dy;
+   k.r[2] *= dz;
 
    for (int i = E.imin ; i <= E.imax ; ++i)
    for (int j = E.jmin ; j <= E.jmax ; ++j)
@@ -102,7 +102,7 @@ EWaveStart ( mesh_t<vec3d_t> & E, mesh_t<vec3d_t> & H)
       E(i, j, l).v.y += e.r[1]*sin (phase - 0.5*k.r[1]);
       E(i, j, l).v.z += e.r[2]*sin (phase - 0.5*k.r[2]);
 
-      phase += 0.5*omega*DT;
+      phase += 0.5*omega*dx;
       H( i, j, l).v.x += h.r[0]*sin (phase - 0.5*k.r[1] - 0.5*k.r[2]);
       H( i, j, l).v.y += h.r[1]*sin (phase - 0.5*k.r[0] - 0.5*k.r[2]);
       H( i, j, l).v.z += h.r[2]*sin (phase - 0.5*k.r[0] - 0.5*k.r[1]);

@@ -164,7 +164,7 @@ void mesh_t<T>::save( const std::string& fileName, int step )
    sizeZ = kmax - kmin + 1;
 
    H5::H5File f( fileName + string_format( "_%06d", step ) + ".h5", H5F_ACC_TRUNC );
-   hsize_t dimsf[4];
+   hsize_t    dimsf[4];
    dimsf[0] = sizeX;
    dimsf[1] = sizeY;
    dimsf[2] = sizeZ;
@@ -172,28 +172,28 @@ void mesh_t<T>::save( const std::string& fileName, int step )
    H5::DataSpace dataspace( RANK, dimsf );
 
    H5::DataSet dataset = f.createDataSet( name, H5::PredType::NATIVE_DOUBLE, dataspace );
-   dataset.write(storage, H5::PredType::NATIVE_DOUBLE);
+   dataset.write( storage, H5::PredType::NATIVE_DOUBLE );
 
-    //stub for attributes
-    double dx = DX,
-           dy = DY,
-           dz = DZ,
-           t =  DT * step;
-    H5::Attribute attDx =   dataset.createAttribute( "dx",   H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
-    H5::Attribute attDy =   dataset.createAttribute( "dy",   H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
-    H5::Attribute attDz =   dataset.createAttribute( "dz",   H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
-    H5::Attribute attDNx =  dataset.createAttribute( "Nx",   H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
-    H5::Attribute attDNy =  dataset.createAttribute( "Ny",   H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
-    H5::Attribute attDNz =  dataset.createAttribute( "Nz",   H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
-    H5::Attribute attTime = dataset.createAttribute( "time", H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
-    attDx.write(   H5::PredType::NATIVE_INT, &dx    );
-    attDy.write(   H5::PredType::NATIVE_INT, &dy    );
-    attDz.write(   H5::PredType::NATIVE_INT, &dz    );
-    attDNx.write(  H5::PredType::NATIVE_INT, &sizeX );
-    attDNy.write(  H5::PredType::NATIVE_INT, &sizeY );
-    attDNz.write(  H5::PredType::NATIVE_INT, &sizeZ );
-    attTime.write( H5::PredType::NATIVE_INT, &t     );
+   //stub for attributes
+//    double dx = DX,
+//           dy = DY,
+//           dz = DZ,
+//           t =  DT * step;
+   double t = dt * step;
 
-
+   H5::Attribute attDx   = dataset.createAttribute( "dx",   H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
+   H5::Attribute attDy   = dataset.createAttribute( "dy",   H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
+   H5::Attribute attDz   = dataset.createAttribute( "dz",   H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
+   H5::Attribute attDNx  = dataset.createAttribute( "Nx",   H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
+   H5::Attribute attDNy  = dataset.createAttribute( "Ny",   H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
+   H5::Attribute attDNz  = dataset.createAttribute( "Nz",   H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
+   H5::Attribute attTime = dataset.createAttribute( "time", H5::PredType::NATIVE_DOUBLE, H5::DataSpace() );
+   attDx.write(   H5::PredType::NATIVE_INT, &dx );
+   attDy.write(   H5::PredType::NATIVE_INT, &dy );
+   attDz.write(   H5::PredType::NATIVE_INT, &dz );
+   attDNx.write(  H5::PredType::NATIVE_INT, &sizeX );
+   attDNy.write(  H5::PredType::NATIVE_INT, &sizeY );
+   attDNz.write(  H5::PredType::NATIVE_INT, &sizeZ );
+   attTime.write( H5::PredType::NATIVE_INT, &t );
 
 }

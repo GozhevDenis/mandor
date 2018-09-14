@@ -9,9 +9,11 @@ project(mandor)
 set(CMAKE_CXX_STANDARD 14)
 
 find_package(HDF5 REQUIRED COMPONENTS C CXX)
+find_package(yaml-cpp PATHS </usr/local/lib/>)
 
 include_directories(src)
 include_directories(src/easylogging)
+include_directories(src/yaml)
 include_directories(${HDF5_INCLUDE_DIRS})
 
 add_executable(mandor
@@ -28,6 +30,7 @@ add_executable(mandor
         src/type_mesh.h
         src/type_vector.cpp
         src/type_vector.h
-        src/log.h)
+        src/log.h src/yaml/initCondit.h src/yaml/initCondit.cpp src/yaml/externParams.h)
 
 target_link_libraries(mandor ${HDF5_CXX_LIBRARIES} ${HDF5_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} yaml-cpp)
